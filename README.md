@@ -9,15 +9,15 @@
 - y -> public key g^x mod p
 - k -> any Integer (0 < k < q)
   
-# Signature
+## Signature
 - r = (g^x mod p) mmod q
 - s = [1/k(Hash(M)+x*r)] mod q
 
-# Verifieng
+## Verifieng
 - V = [(g^u1 * y^u2)mod p] mod q
 - u1 = [Hash(M) w] mod q
 - w = 1/s mod q
 - u2 = r*w mod q
 
-# Comparasion 
+## Comparasion 
 if r == V -> True

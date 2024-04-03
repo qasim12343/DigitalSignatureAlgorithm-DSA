@@ -10,7 +10,7 @@
 - k -> any Integer (0 < k < q)
   
 ## Signature
-- r = (g^x mod p) mmod q
+- r = (g^x mod p) mod q
 - s = [1/k(Hash(M)+x*r)] mod q
 
 ## Verifieng

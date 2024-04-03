@@ -4,4 +4,20 @@
 - p -> Prime Number  2^L-1 < p < 2^L
 - q -> prime divisor of (p-1)
 - g -> h^(p-1)q mod p
+- h -> any Integer (1 < h < p-1)
+- x -> sender private key random number between 0 and q
+- y -> public key g^x mod p
+- k -> any Integer (0 < k < q)
+  
+# Signature
+- r = (g^x mod p) mmod q
+- s = [1/k(Hash(M)+x*r)] mod q
 
+# Verifieng
+- V = [(g^u1 * y^u2)mod p] mod q
+- u1 = [Hash(M) w] mod q
+- w = 1/s mod q
+- u2 = r*w mod q
+
+# Comparasion 
+if r == V -> True

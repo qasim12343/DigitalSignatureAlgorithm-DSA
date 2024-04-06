@@ -33,45 +33,51 @@ def hash(message):
 
 
 def sign(message, p, q, g, private_key):
-    k = random.randint(1, q-1)
-    print(k)
-    r = ((g**private_key) % p) % q
-    print(r)
-    s = ((1/k)*(hash(message)+private_key*r)) % q
-    print(s)
+    s = 0
+    r = 0
+    while s == 0 or r == 0:
+        k = random.randint(1, q-1)
+        r = int(((g**k) % p) % q)
+        s = int((pow(k, -1)*(hash(message)+private_key*r)) % q)
+    print("k = ", k)
+    print("r = ", r)
+    print("s = ", s)
     return (r, s)
 
 
 def verify(signature, tampered_message, p, q, g, public_key) -> bool:
     r, s = signature
-    w = (1/s) % q
-    print(w)
+    w = pow(s, -1) % q
+    print("w = ", w)
     u1 = (hash(tampered_message)*w) % q
-    print(u1)
+    print("u1 = ", u1)
     u2 = (r*w) % q
-    print(u2)
-    v = (((g**u1)*(public_key**u2)) % p) % q
-    print(v)
+    print("u2 = ", u2)
+    v = ((g**u1)*(public_key**u2) % p) % q
+    print("v = ", v)
     return r == v
 
 
 def main():
-    p = 11
-    q = 5
-    h = 8
-    g = h**((p-1)/q) % p
+    p = 23
+    q = 11
+    g = 1
+    while g == 1:
+        h = random.randint(2, p-2)
+        g = int(pow(h, (p-1)/q) % p)
+
     msg = "Salam"
     x = random.randint(1, q-1)
-    y = (g**x) % p
+    y = int((g**x) % p)
 
-    print(p)
-    print(q)
-    print(g)
-    print(x)
-    print(y)
+    print("p = ", p)
+    print("q = ", q)
+    print("g = ", g)
+    print("x = ", x)
+    print("y = ", y)
     signature = sign(msg, p, q, g, x)
     result = verify(signature, msg, p, q, g, y)
-    print("result({result}})".format(True, False))
+    print(f"result({result})")
 
 
 main()

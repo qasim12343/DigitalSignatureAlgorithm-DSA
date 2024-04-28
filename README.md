@@ -13,13 +13,13 @@
 ## Signature
 
 - r = (g^x mod p) mod q
-- s = [1/k(Hash(M)+x*r)] mod q
+- s = [k^-1(Hash(M)+x*r)] mod q
 
 ## Verifieng
 
 - V = [(g^u1 * y^u2)mod p] mod q
 - u1 = [Hash(M) w] mod q
-- w = 1/s mod q
+- w = s^-1 mod q
 - u2 = r\*w mod q
 
 ## Comparasion

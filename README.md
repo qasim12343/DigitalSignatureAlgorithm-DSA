@@ -12,7 +12,7 @@
 
 ## Signature
 
-- r = (g^x mod p) mod q
+- r = (g^k mod p) mod q
 - s = [k^-1(Hash(M)+x*r)] mod q
 
 ## Verifieng
